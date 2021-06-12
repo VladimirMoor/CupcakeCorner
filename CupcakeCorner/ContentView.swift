@@ -25,6 +25,29 @@ struct ContentView: View {
                         Text("Number of cakes: \(order.quantity)")
                     }
                 }
+                
+                Section {
+                    Toggle(isOn: $order.specialRequestEnabled.animation(), label: {
+                        Text("Any special requests?")
+                    })
+                    
+                    if order.specialRequestEnabled {
+                        Toggle(isOn: $order.extraFrosting, label: {
+                            Text("Add extra frosting")
+                        })
+                        
+                        Toggle(isOn: $order.addSprinkles, label: {
+                            Text("Add extra sprinkles")
+                        })
+                    }
+                }
+                
+                Section {
+                    NavigationLink(destination: AddressView(order: order)) {
+                            Text("Delivery details")
+                        }
+                }
+                
             }
             .navigationTitle("Cupcake Corner")
         }
